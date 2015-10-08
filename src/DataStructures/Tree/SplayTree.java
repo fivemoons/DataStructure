@@ -1,7 +1,7 @@
 package DataStructures.Tree;
 
 import DataStructures.Comparable;
-import DataStructures.Hash.MyInteger;
+import DataStructures.MyInteger;
 import DataStructures.Tree.BinaryNode;
 
     // SplayTree class

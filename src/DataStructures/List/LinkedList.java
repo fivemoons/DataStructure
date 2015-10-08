@@ -1,6 +1,6 @@
     package DataStructures.List;
 
-import DataStructures.Hash.MyInteger;
+import DataStructures.MyInteger;
 
     // LinkedList class
     //

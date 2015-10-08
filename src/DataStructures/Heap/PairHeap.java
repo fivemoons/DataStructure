@@ -1,7 +1,7 @@
     package DataStructures.Heap;
 
 import DataStructures.Comparable;
-import DataStructures.Hash.MyInteger;
+import DataStructures.MyInteger;
 
     // PairHeap class
     //

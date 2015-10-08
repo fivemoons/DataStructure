@@ -1,7 +1,7 @@
     package DataStructures.Queue;
 
+import DataStructures.MyInteger;
 import DataStructures.Overflow;
-import DataStructures.Hash.MyInteger;
 
     // QueueAr class
     //

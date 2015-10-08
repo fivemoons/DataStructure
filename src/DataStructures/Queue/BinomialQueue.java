@@ -1,8 +1,8 @@
     package DataStructures.Queue;
 
 import DataStructures.Comparable;
+import DataStructures.MyInteger;
 import DataStructures.Overflow;
-import DataStructures.Hash.MyInteger;
 
     // BinomialQueue class
     //

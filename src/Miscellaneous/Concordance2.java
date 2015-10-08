@@ -6,6 +6,7 @@ import DataStructures.*;
 import DataStructures.Comparable;
 import DataStructures.List.LinkedList;
 import DataStructures.List.LinkedListItr;
+import DataStructures.Tree.AvlTree;
 
 class WordEntry implements Comparable
 {

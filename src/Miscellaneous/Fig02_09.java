@@ -1,6 +1,6 @@
 package Miscellaneous;
 import DataStructures.Comparable;
-import DataStructures.Hash.MyInteger;
+import DataStructures.MyInteger;
 
 public class Fig02_09
 {

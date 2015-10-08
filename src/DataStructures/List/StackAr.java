@@ -1,8 +1,8 @@
     package DataStructures.List;
 
+import DataStructures.MyInteger;
 import DataStructures.Overflow;
 import DataStructures.Underflow;
-import DataStructures.Hash.MyInteger;
 
     // StackAr class
     //

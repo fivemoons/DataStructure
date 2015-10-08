@@ -1,7 +1,7 @@
     package DataStructures.List;
 
+import DataStructures.MyInteger;
 import DataStructures.Underflow;
-import DataStructures.Hash.MyInteger;
 
     // StackLi class
     //

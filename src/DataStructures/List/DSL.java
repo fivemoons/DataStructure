@@ -1,7 +1,7 @@
     package DataStructures.List;
 
 import DataStructures.Comparable;
-import DataStructures.Hash.MyInteger;
+import DataStructures.MyInteger;
 
     // BinarySearchTree class
     //

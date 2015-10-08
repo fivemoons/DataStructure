@@ -1,6 +1,6 @@
-    package DataStructures.Hash;
+    package DataStructures;
 
-import DataStructures.Comparable;
+import DataStructures.Hash.Hashable;
 
     /**
      * Wrapper class for use with generic data structures.
