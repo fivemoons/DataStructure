@@ -2,12 +2,17 @@ package DataStructures;
 
 /**
  * 排序方法 正序排序
- * 
+ * @author fivemoons
  */
 public final class Sort {
 	/**
 	 * 插入排序
-	 * 
+	 * 稳定
+	 * 空间复杂度o(1)
+	 * 时间复杂度：
+	 * 	最佳情况：n-1次比较，2(n-1)次移动  O(n)
+	 * 	最差情况：O(n2)比较，O(n2)移动
+	 * 	平均情况：O(n2)
 	 * @param a
 	 *            一个可比较的元素
 	 */
@@ -48,7 +53,7 @@ public final class Sort {
 	 */
 	public static void heapsort(Comparable[] a) {
 		for (int i = a.length / 2 - 1; i >= 0; i--) //从有儿子的点开始
-			percDown(a, i, a.length);// 建堆  a组数 第i个位置开始下滤，堆一共a.length长
+			percDown(a, i, a.length);// 建堆  a数组 第i个位置开始下滤，堆一共a.length长
 
 		for (int i = a.length - 1; i > 0; i--) {
 			swapReferences(a, 0, i); // 交换最大元素与最后
