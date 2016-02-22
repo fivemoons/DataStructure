@@ -120,6 +120,172 @@ public class RBTree{
 		}
 		root.color = Black;
 	}
+	public boolean delete(int x){
+		Node del = root;
+		while(del != null && del.val != x){
+			if(x < del.val)
+				del = del.left;
+			else if(del.val < x)
+				del = del.right;
+		}
+		if(del == null)
+			return false;
+		else{
+			Node P = del.par;
+			Node next = null;
+			if(del.left == null && del.right == null){//叶子节点
+				next = null; //接替节点为null
+				if(P == null) root = null;
+				if(P != null && P.left == del){ //是父左儿子
+					P.left = null;
+				}else if(P != null && P.right == del){ //是父右儿子
+					P.right = null;
+				}
+				del.par = null; //去掉父节点
+			}else if (del.left != null && del.right == null){//只有左儿子
+				next = del.left;
+				if(P == null) root = next;
+				if(P != null && P.left == del){//是父左儿子
+					P.left = del.left;
+				}else if(P != null && P.right == del){//是父右儿子
+					P.right = del.left;
+				}
+				del.left.par = P;
+				del.par = null;
+				del.left = null;
+			}else if (del.right != null && del.left == null){//只有右儿子
+				next = del.right;
+				if(P == null) root = next;
+				if(P != null && P.left == del){
+					P.left = del.right;
+				}else if(P != null && P.right == del){
+					P.right = del.right;
+				}
+				del.right.par = P;
+				del.par = null;
+				del.right = null;
+			}else{ //del.right != null && del.left != null
+				Node min = findMin(del.right);
+				del.val = min.val;
+				
+				next = min.right;
+				P = min.par;
+				
+				if (P==del)
+					P.right = min.right;
+				else
+					P.left = min.right;
+				
+				if (next != null){
+					next.par = P;
+				}
+				min.right = null;
+				min.par = null;
+				del = min;
+			}
+			//min是一个孤独的点，已经被删了，next是一个补位点 ：所以 next->del 红+黑 或 黑+黑
+			if (!isBlack(next) && isBlack(del)){
+				next.color = Black;
+			}else if (isBlack(next) && isBlack(del) && P != null){
+				deleteFix(next,P);
+			}
+			//any+红 不用
+			return true;
+		}
+	}
+	private boolean isBlack(Node x){
+		return x==null || x.color == Black;
+	}
+	private void deleteFix(Node cur,Node Par){
+		while(cur != root && isBlack(cur)){
+			Node P = (cur == null) ? Par : cur.par; //cur不是根 P肯定存在
+			Node B = null;
+			Node C1 = null;
+			Node C2 = null;
+			if(P.left == cur){ //cur是P的左儿子
+				B = P.right;
+				if(!isBlack(B)){//case1：变成case2
+					B.color = Black; //case1：兄弟变黑
+					P.color = Red;//case1：父变红
+					leftRotate(P);//case1：父左旋
+					//System.out.println("case1");
+				}else{//case2，3，4
+					C1 = B.left; //大侄子
+					C2 = B.right; //二侄子
+					if(isBlack(C1) && isBlack(C2)){//case2：递归父
+						B.color = Red; //case2：兄弟变红
+						cur = P; //case2：递归P
+						//System.out.println("case2");
+					}else if((!isBlack(C1)) && isBlack(C2)){//case3：变为case4 C1肯定为Red
+						C1.color = Black; //case3：大侄子变黑
+						B.color = Red; //case3：兄弟变红
+						rightRotate(B); //case3：兄弟右旋
+						//System.out.println("case3");
+					}else{ //case4：C1随意，C2为红
+						B.color = P.color; //case4：兄变父
+						P.color = Black; //case4：父变黑
+						C2.color = Black; //case4：二侄子变黑
+						leftRotate(P); //case4：父左旋
+						cur = root; //算法结束
+						//System.out.println("case4");
+					}
+				}
+			}else{//cur是P的右儿子
+				B = P.left;
+				if(!isBlack(B)){//case1：变成case2
+					B.color = Black; //case1：兄弟变黑
+					P.color = Red;//case1：父变红
+					rightRotate(P);//case1：父右旋
+				}else{//case2，3，4
+					C1 = B.right; //小侄子
+					C2 = B.left; //大侄子
+					if(isBlack(C1) && isBlack(C2)){//case2：递归父
+						B.color = Red; //case2：兄弟变红
+						cur = P; //case2：递归P
+					}else if((!isBlack(C1)) && isBlack(C2)){//case3：变为case4 C1肯定为Red
+						C1.color = Black; //case3：大侄子变黑
+						B.color = Red; //case3：兄弟变红
+						leftRotate(B); //case3：兄弟左旋
+					}else{ //case4：C1随意，C2为红
+						B.color = P.color; //case4：兄变父
+						P.color = Black; //case4：父变黑
+						C2.color = Black; //case4：二侄子变黑
+						rightRotate(P); //case4：父右旋
+						cur = root; //算法结束
+					}
+				}
+			}
+		}
+		cur.color = Black;
+	}
+	public Node findMin(Node root){
+		if (root == null) return null;
+		Node ans = root;
+		while(ans.left!=null)
+			ans = ans.left;
+		return ans;
+	}
+	
+	public Node findMax(Node root){
+		if (root == null) return null;
+		Node ans = root;
+		while(ans.right!=null)
+			ans = ans.right;
+		return ans;
+	}
+	
+	public Node find(int x){
+		Node ans = root;
+		while(ans!=null){
+			if (x < ans.val)
+				ans = ans.left;
+			else if(ans.val < x)
+				ans = ans.right;
+			else
+				return ans;
+		}
+		return null;
+	}
 	private void print(Node root,int dep){
 		if (root == null) return;
 		print(root.right,dep+1);
@@ -132,6 +298,7 @@ public class RBTree{
 	public void print(){
 		print(root,0);
 	}
+	
 	public static void main(String[] args) {
 		RBTree tree = new RBTree();
 		tree.insert(12);
@@ -154,6 +321,27 @@ public class RBTree{
 		tree.insert(3);
 		tree.insert(8);
 		tree.insert(17);
+		tree.print();
+		tree.delete(12);
+		tree.delete(1);
+		tree.delete(9);
+		tree.delete(2);
+		tree.delete(0);
+		tree.delete(11);
+		tree.delete(7);
+		tree.delete(19);
+		tree.delete(4);
+		tree.delete(15);
+		tree.delete(18);
+		tree.delete(5);
+		tree.delete(14);
+		tree.delete(13);
+		tree.delete(10);
+		tree.delete(16);
+		tree.delete(6);
+		tree.delete(3);
+		tree.delete(8);
+		tree.delete(17);
 		tree.print();
 	}
 }
