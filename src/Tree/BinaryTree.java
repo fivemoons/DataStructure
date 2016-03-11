@@ -24,7 +24,7 @@ public class BinaryTree {
 				root = stack.pop().right;
 			}else{
 				stack.push(root);
-				ans.add(root.val); //前序遍历入栈就加入到ans中
+				ans.add(stack.peek().val); //前序遍历入栈就加入到ans中
 				root = root.left;
 			}
 		}
@@ -55,8 +55,8 @@ public class BinaryTree {
 		while (root != null || !stack.isEmpty()){
 			if(root == null){
 				if(stack.peek().right == null || stack.peek().right == last){ //右儿子不需要遍历
-					last = stack.pop();
-					ans.add(last.val);
+					last = stack.peek();
+					ans.add(stack.pop().val);
 				}else{
 					root = stack.peek().right; //右儿子需要遍历
 				}
