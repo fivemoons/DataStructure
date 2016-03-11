@@ -1,44 +1,44 @@
 package DataStructures;
 
 /**
- * ÅÅĞò·½·¨ ÕıĞòÅÅĞò
+ * æ’åºæ–¹æ³• æ­£åºæ’åº
  * @author fivemoons
  */
 public final class Sort {
 	/**
-	 * ²åÈëÅÅĞò
-	 * ÎÈ¶¨
-	 * ¿Õ¼ä¸´ÔÓ¶Èo(1)
-	 * Ê±¼ä¸´ÔÓ¶È£º
-	 * 	×î¼ÑÇé¿ö£ºn-1´Î±È½Ï£¬2(n-1)´ÎÒÆ¶¯  O(n)
-	 * 	×î²îÇé¿ö£ºO(n2)±È½Ï£¬O(n2)ÒÆ¶¯
-	 * 	Æ½¾ùÇé¿ö£ºO(n2)
+	 * æ’å…¥æ’åº
+	 * ç¨³å®š
+	 * ç©ºé—´å¤æ‚åº¦o(1)
+	 * æ—¶é—´å¤æ‚åº¦ï¼š
+	 * 	æœ€ä½³æƒ…å†µï¼šn-1æ¬¡æ¯”è¾ƒï¼Œ2(n-1)æ¬¡ç§»åŠ¨  O(n)
+	 * 	æœ€å·®æƒ…å†µï¼šO(n2)æ¯”è¾ƒï¼ŒO(n2)ç§»åŠ¨
+	 * 	å¹³å‡æƒ…å†µï¼šO(n2)
 	 * @param a
-	 *            Ò»¸ö¿É±È½ÏµÄÔªËØ
+	 *            ä¸€ä¸ªå¯æ¯”è¾ƒçš„å…ƒç´ 
 	 */
 	public static void insertionSort(Comparable[] a) {
 		int j;
-		for (int p = 1; p < a.length; p++) { // Êı×é´Ó0¿ªÊ¼
-			Comparable tmp = a[p]; // ĞèÒª²åÈëµÄÏî
+		for (int p = 1; p < a.length; p++) { // æ•°ç»„ä»0å¼€å§‹
+			Comparable tmp = a[p]; // éœ€è¦æ’å…¥çš„é¡¹
 			for (j = p; j > 0 && tmp.compareTo(a[j - 1]) < 0; j--)
-				// ´ÓpÎ»ÖÃÍùÇ°É¨£¬Èç¹ûtmpĞ¡ÓÚa[j-1] ¿ÕÈ±ºóÒÆÒ»Î»
+				// ä»pä½ç½®å¾€å‰æ‰«ï¼Œå¦‚æœtmpå°äºa[j-1] ç©ºç¼ºåç§»ä¸€ä½
 				a[j] = a[j - 1];
-			a[j] = tmp; // tmp·ÅÈëÅÅĞòµÄÎ»ÖÃ
+			a[j] = tmp; // tmpæ”¾å…¥æ’åºçš„ä½ç½®
 		}
 	}
 
 	/**
-	 * Ï£¶ûÅÅĞò
+	 * å¸Œå°”æ’åº
 	 * 
 	 * @param a
-	 *            Ò»¸ö¿É±È½ÏµÄÔªËØ
+	 *            ä¸€ä¸ªå¯æ¯”è¾ƒçš„å…ƒç´ 
 	 */
 	public static void shellsort(Comparable[] a) {
 		int j;
 		for (int gap = a.length / 2; gap > 0; gap /= 2)
-			// gapÔöÁ¿
-			for (int i = gap; i < a.length; i++) { // ´Ógap¿ªÊ¼Öğ¸öÉ¨Ãè
-				Comparable tmp = a[i]; // µ±Ç°Òª±È½ÏÏî
+			// gapå¢é‡
+			for (int i = gap; i < a.length; i++) { // ä»gapå¼€å§‹é€ä¸ªæ‰«æ
+				Comparable tmp = a[i]; // å½“å‰è¦æ¯”è¾ƒé¡¹
 				for (j = i; j >= gap && tmp.compareTo(a[j - gap]) < 0; j -= gap)
 					a[j] = a[j - gap];
 				a[j] = tmp;
@@ -46,26 +46,26 @@ public final class Sort {
 	}
 
 	/**
-	 * ±ê×¼¶ÑÅÅĞò
+	 * æ ‡å‡†å †æ’åº
 	 * 
 	 * @param a
-	 *            Ò»¸ö¿É±È½ÏµÄÔªËØ
+	 *            ä¸€ä¸ªå¯æ¯”è¾ƒçš„å…ƒç´ 
 	 */
 	public static void heapsort(Comparable[] a) {
-		for (int i = a.length / 2 - 1; i >= 0; i--) //´ÓÓĞ¶ù×ÓµÄµã¿ªÊ¼
-			percDown(a, i, a.length);// ½¨¶Ñ  aÊı×é µÚi¸öÎ»ÖÃ¿ªÊ¼ÏÂÂË£¬¶ÑÒ»¹²a.length³¤
+		for (int i = a.length / 2 - 1; i >= 0; i--) //ä»æœ‰å„¿å­çš„ç‚¹å¼€å§‹
+			percDown(a, i, a.length);// å»ºå †  aæ•°ç»„ ç¬¬iä¸ªä½ç½®å¼€å§‹ä¸‹æ»¤ï¼Œå †ä¸€å…±a.lengthé•¿
 
 		for (int i = a.length - 1; i > 0; i--) {
-			swapReferences(a, 0, i); // ½»»»×î´óÔªËØÓë×îºó
-			percDown(a, 0, i); //iÊÇµ±Ç°ÔªËØµÄ¸öÊı¡£
+			swapReferences(a, 0, i); // äº¤æ¢æœ€å¤§å…ƒç´ ä¸æœ€å
+			percDown(a, 0, i); //iæ˜¯å½“å‰å…ƒç´ çš„ä¸ªæ•°ã€‚
 		}
 	}
 
 	/**
-	 * Ë½ÓĞ·½·¨£º¶ÑÅÅĞò·µ»Ø×ó¶ù×Ó
+	 * ç§æœ‰æ–¹æ³•ï¼šå †æ’åºè¿”å›å·¦å„¿å­
 	 * 
 	 * @param i
-	 *            ¶ÑÖĞµÄÒ»¸öÔªËØ
+	 *            å †ä¸­çš„ä¸€ä¸ªå…ƒç´ 
 	 * @return the index of the left child.
 	 */
 	private static int leftChild(int i) {
@@ -73,23 +73,23 @@ public final class Sort {
 	}
 
 	/**
-	 * Ë½ÓĞ·½·¨£º¶ÑÅÅĞòÏÂÂËÔªËØ
+	 * ç§æœ‰æ–¹æ³•ï¼šå †æ’åºä¸‹æ»¤å…ƒç´ 
 	 * 
 	 * @param a
-	 *            Ò»¸ö¿É±È½ÏµÄÔªËØ
-	 * @index i ÒªÏÂÂËµÄÔªËØ
-	 * @int n ¶şÏî¶ÑµÄ´óĞ¡
+	 *            ä¸€ä¸ªå¯æ¯”è¾ƒçš„å…ƒç´ 
+	 * @index i è¦ä¸‹æ»¤çš„å…ƒç´ 
+	 * @int n äºŒé¡¹å †çš„å¤§å°
 	 */
 	private static void percDown(Comparable[] a, int i, int n) {
 		int child;
 		Comparable tmp;
 
-		for (tmp = a[i]; leftChild(i) < n; i = child) { //nÊÇ¶ÑµÄ´óĞ¡£¬<n±íÊ¾Ã»ÓĞÔ½½ç
+		for (tmp = a[i]; leftChild(i) < n; i = child) { //næ˜¯å †çš„å¤§å°ï¼Œ<nè¡¨ç¤ºæ²¡æœ‰è¶Šç•Œ
 			child = leftChild(i);
-			if (child != n - 1 && a[child].compareTo(a[child + 1]) < 0) //£¡=n-1±íÊ¾child²»ÊÇ×îºóÒ»¸ö½Úµã
-				child++; //×óÓÒ¶ù×ÓÖĞ½Ï´óµÄ
+			if (child != n - 1 && a[child].compareTo(a[child + 1]) < 0) //ï¼=n-1è¡¨ç¤ºchildä¸æ˜¯æœ€åä¸€ä¸ªèŠ‚ç‚¹
+				child++; //å·¦å³å„¿å­ä¸­è¾ƒå¤§çš„
 			if (tmp.compareTo(a[child]) < 0)
-				a[i] = a[child]; //ÏÂÂËÒ»²ã
+				a[i] = a[child]; //ä¸‹æ»¤ä¸€å±‚
 			else
 				break;
 		}
@@ -97,27 +97,27 @@ public final class Sort {
 	}
 
 	/**
-	 * ¹é²¢ÅÅĞò
+	 * å½’å¹¶æ’åº
 	 * 
 	 * @param a
-	 *            Ò»¸ö¿É±È½ÏµÄÔªËØ
+	 *            ä¸€ä¸ªå¯æ¯”è¾ƒçš„å…ƒç´ 
 	 */
 	public static void mergeSort(Comparable[] a) {
-		Comparable[] tmpArray = new Comparable[a.length]; //´æ·Å¹é²¢µÄ½á¹û
-		mergeSort(a, tmpArray, 0, a.length - 1);//¹é²¢0~a.length-1
+		Comparable[] tmpArray = new Comparable[a.length]; //å­˜æ”¾å½’å¹¶çš„ç»“æœ
+		mergeSort(a, tmpArray, 0, a.length - 1);//å½’å¹¶0~a.length-1
 	}
 
 	/**
-	 * Ë½ÓĞ·½·¨£ºÄÚ²¿µİ¹éµ÷ÓÃ
+	 * ç§æœ‰æ–¹æ³•ï¼šå†…éƒ¨é€’å½’è°ƒç”¨
 	 * 
 	 * @param a
-	 *            Ò»¸ö¿É±È½ÏµÄÔªËØ
+	 *            ä¸€ä¸ªå¯æ¯”è¾ƒçš„å…ƒç´ 
 	 * @param tmpArray
-	 *            ´æ·Å¹é²¢µÄ½á¹û
+	 *            å­˜æ”¾å½’å¹¶çš„ç»“æœ
 	 * @param left
-	 *            ×óÏÂ±ê
+	 *            å·¦ä¸‹æ ‡
 	 * @param right
-	 *            ÓÒÏÂ±ê
+	 *            å³ä¸‹æ ‡
 	 */
 	private static void mergeSort(Comparable[] a, Comparable[] tmpArray,
 			int left, int right) {
@@ -130,66 +130,66 @@ public final class Sort {
 	}
 
 	/**
-	 * Ë½ÓĞ·½·¨£ººÏ²¢Á½¸öÅÅĞòºÃµÄÊı¾İ
+	 * ç§æœ‰æ–¹æ³•ï¼šåˆå¹¶ä¸¤ä¸ªæ’åºå¥½çš„æ•°æ®
 	 * 
 	 * @param a
-	 *            Ò»¸ö¿É±È½ÏµÄÔªËØ
+	 *            ä¸€ä¸ªå¯æ¯”è¾ƒçš„å…ƒç´ 
 	 * @param tmpArray
-	 *            ·ÅÖÃºÏ²¢½á¹ûµÄÊı×é
+	 *            æ”¾ç½®åˆå¹¶ç»“æœçš„æ•°ç»„
 	 * @param leftPos
-	 *            µÚÒ»²¿·Ö×óÏÂ±ê
+	 *            ç¬¬ä¸€éƒ¨åˆ†å·¦ä¸‹æ ‡
 	 * @param rightPos
-	 *            µÚ¶ş²¿·Ö×óÏÂ±ê
+	 *            ç¬¬äºŒéƒ¨åˆ†å·¦ä¸‹æ ‡
 	 * @param rightEnd
-	 *            µÚ¶ş²¿·ÖÓÒÏÂ±ê
+	 *            ç¬¬äºŒéƒ¨åˆ†å³ä¸‹æ ‡
 	 */
 	private static void merge(Comparable[] a, Comparable[] tmpArray,
 			int leftPos, int rightPos, int rightEnd) {
-		int leftEnd = rightPos - 1; //µÚÒ»²¿·ÖÓÒÏÂ±ê
-		int tmpPos = leftPos; //tmpµÄ×óÏÂ±ê
-		int numElements = rightEnd - leftPos + 1;//È«²¿ÔªËØ¸öÊı
+		int leftEnd = rightPos - 1; //ç¬¬ä¸€éƒ¨åˆ†å³ä¸‹æ ‡
+		int tmpPos = leftPos; //tmpçš„å·¦ä¸‹æ ‡
+		int numElements = rightEnd - leftPos + 1;//å…¨éƒ¨å…ƒç´ ä¸ªæ•°
 
-		//Ö÷Ñ­»·
+		//ä¸»å¾ªç¯
 		while (leftPos <= leftEnd && rightPos <= rightEnd)
 			if (a[leftPos].compareTo(a[rightPos]) <= 0)
 				tmpArray[tmpPos++] = a[leftPos++];
 			else
 				tmpArray[tmpPos++] = a[rightPos++];
-		// ¿½±´µÚÒ»²¿·ÖÊ£Óà
+		// æ‹·è´ç¬¬ä¸€éƒ¨åˆ†å‰©ä½™
 		while (leftPos <= leftEnd)
 			tmpArray[tmpPos++] = a[leftPos++];
 
-		// ¿½±´µÚ¶ş²¿·ÖÊ£Óà
+		// æ‹·è´ç¬¬äºŒéƒ¨åˆ†å‰©ä½™
 		while (rightPos <= rightEnd)
 			tmpArray[tmpPos++] = a[rightPos++];
 
-		// °ÑtmpÊı×é¿½±´»ØaÊı×é
+		// æŠŠtmpæ•°ç»„æ‹·è´å›aæ•°ç»„
 		for (int i = 0; i < numElements; i++, rightEnd--)
 			a[rightEnd] = tmpArray[rightEnd];
 	}
 
 	/**
-	 * ¿ìËÙÅÅĞò
+	 * å¿«é€Ÿæ’åº
 	 * 
 	 * @param a
-	 *            Ò»¸ö¿É±È½ÏµÄÔªËØÊı×é
+	 *            ä¸€ä¸ªå¯æ¯”è¾ƒçš„å…ƒç´ æ•°ç»„
 	 */
 	public static void quicksort(Comparable[] a) {
-		quicksort(a, 0, a.length - 1); //ÏÂ±ê 0~a.length-1
+		quicksort(a, 0, a.length - 1); //ä¸‹æ ‡ 0~a.length-1
 	}
 
-	//½ØÖ¹´óĞ¡
+	//æˆªæ­¢å¤§å°
 	private static final int CUTOFF = 3;
 
 	/**
-	 * ½»»»ÔªËØ ÓÃfinalĞ´ ±àÒëÆ÷»á×Ô¶¯Ç¿ÖÆÖ±½Ó²åÈëµÄ·½Ê½±àÒëÕâĞ©´úÂë
+	 * äº¤æ¢å…ƒç´  ç”¨finalå†™ ç¼–è¯‘å™¨ä¼šè‡ªåŠ¨å¼ºåˆ¶ç›´æ¥æ’å…¥çš„æ–¹å¼ç¼–è¯‘è¿™äº›ä»£ç 
 	 * 
 	 * @param a
-	 *            Ò»¸öObjectÊı×é
+	 *            ä¸€ä¸ªObjectæ•°ç»„
 	 * @param index1
-	 *            µÚÒ»¸öÔªËØÏÂ±ê
+	 *            ç¬¬ä¸€ä¸ªå…ƒç´ ä¸‹æ ‡
 	 * @param index2
-	 *            µÚ¶ş¸öÔªËØÏÂ±ê
+	 *            ç¬¬äºŒä¸ªå…ƒç´ ä¸‹æ ‡
 	 */
 	public static final void swapReferences(Object[] a, int index1, int index2) {
 		Object tmp = a[index1];
@@ -198,7 +198,7 @@ public final class Sort {
 	}
 
 	/**
-	 * ·µ»ØÈı¸öÊıµÄÖĞÎ»Êı
+	 * è¿”å›ä¸‰ä¸ªæ•°çš„ä¸­ä½æ•°
 	 */
 	private static Comparable median3(Comparable[] a, int left, int right) {
 		int center = (left + right) / 2;
@@ -209,55 +209,55 @@ public final class Sort {
 		if (a[right].compareTo(a[center]) < 0) // right < center
 			swapReferences(a, center, right);
 
-		swapReferences(a, center, right - 1); //½«centerÒÆ¶¯µ½right-1Î»ÖÃÉÏ
-		return a[right - 1]; //·µ»ØÊàÅ¦Ôª
+		swapReferences(a, center, right - 1); //å°†centerç§»åŠ¨åˆ°right-1ä½ç½®ä¸Š
+		return a[right - 1]; //è¿”å›æ¢çº½å…ƒ
 	}
 
 	/**
-	 * Ë½ÓĞ·½·¨£ºµİ¹éµ÷ÓÃ£¬Ê¹ÓÃÈı¸öÊıµÄÖĞÎ»ÊıºÍ½ØÖ¹10
+	 * ç§æœ‰æ–¹æ³•ï¼šé€’å½’è°ƒç”¨ï¼Œä½¿ç”¨ä¸‰ä¸ªæ•°çš„ä¸­ä½æ•°å’Œæˆªæ­¢10
 	 * 
 	 * @param a
-	 *            Ò»¸ö¿É±È½ÏµÄµÄÊı×é
+	 *            ä¸€ä¸ªå¯æ¯”è¾ƒçš„çš„æ•°ç»„
 	 * @param left
-	 *            ×óÏÂ±ê
+	 *            å·¦ä¸‹æ ‡
 	 * @param right
-	 *            ÓÒÏÂ±ê
+	 *            å³ä¸‹æ ‡
 	 */
 	private static void quicksort(Comparable[] a, int left, int right) {
-		if (left + CUTOFF <= right) { //ÅĞ¶ÏÒªÅÅĞòµÄÊıÄ¿ÊÇ·ñ´óÓÚ½ØÖ¹Öµ
-			Comparable pivot = median3(a, left, right); //·µ»ØÊàÅ¦Ôª£¬²¢°ÑÈı¸öÊı·ÅÔÚleft,right-1,right
+		if (left + CUTOFF <= right) { //åˆ¤æ–­è¦æ’åºçš„æ•°ç›®æ˜¯å¦å¤§äºæˆªæ­¢å€¼
+			Comparable pivot = median3(a, left, right); //è¿”å›æ¢çº½å…ƒï¼Œå¹¶æŠŠä¸‰ä¸ªæ•°æ”¾åœ¨left,right-1,right
 			
 			int i = left, j = right - 1;
 			for (;;) {
-				while (a[++i].compareTo(pivot) < 0) {} //iÓÒÒÆ Ö±µ½´óÓÚµÈÓÚÊàÅ¦Ôª
-				while (a[--j].compareTo(pivot) > 0) {} //j×óÒÆ Ö±µ½Ğ¡ÓÚµÈÓÚÊàÅ¦Ôª
+				while (a[++i].compareTo(pivot) < 0) {} //iå³ç§» ç›´åˆ°å¤§äºç­‰äºæ¢çº½å…ƒ
+				while (a[--j].compareTo(pivot) > 0) {} //jå·¦ç§» ç›´åˆ°å°äºç­‰äºæ¢çº½å…ƒ
 				if (i < j)
-					swapReferences(a, i, j); //Èç¹ûi<j ½»»»i jËùÖ¸ÏòµÄÔªËØ
+					swapReferences(a, i, j); //å¦‚æœi<j äº¤æ¢i jæ‰€æŒ‡å‘çš„å…ƒç´ 
 				else
 					break;
 			}
 			
-			swapReferences(a, i, right - 1); // left~right-1ÒÑ¾­·Ö³ÉÁ½²¿·Ö ÊàÅ¦Ôª·Åµ½Á½²¿·ÖµÄ½çÏß
+			swapReferences(a, i, right - 1); // left~right-1å·²ç»åˆ†æˆä¸¤éƒ¨åˆ† æ¢çº½å…ƒæ”¾åˆ°ä¸¤éƒ¨åˆ†çš„ç•Œçº¿
 			
-			quicksort(a, left, i - 1); // µİ¹éÅÅĞòĞ¡ÓÚµÈÓÚÊàÅ¦ÔªµÄµÚÒ»²¿·Ö
-			quicksort(a, i + 1, right); // µİ¹éÅÅĞò´óÓÚµÈÓÚÊàÅ¦ÔªµÄµÚ¶ş²¿·Ö
+			quicksort(a, left, i - 1); // é€’å½’æ’åºå°äºç­‰äºæ¢çº½å…ƒçš„ç¬¬ä¸€éƒ¨åˆ†
+			quicksort(a, i + 1, right); // é€’å½’æ’åºå¤§äºç­‰äºæ¢çº½å…ƒçš„ç¬¬äºŒéƒ¨åˆ†
 		} else
-			insertionSort(a, left, right); 	// ±È½ØÖ¹ÊıĞ¡£¬Ñ¡Ôñ²åÈëÅÅĞò
+			insertionSort(a, left, right); 	// æ¯”æˆªæ­¢æ•°å°ï¼Œé€‰æ‹©æ’å…¥æ’åº
 	}
 
 	/**
-	 * Ë½ÓĞ·½·¨£ºÓÃÓÚ¿ìËÙÅÅĞòÖĞ³¤¶È±ÈcutoffĞ¡µÄÊı×éµÄÅÅĞò
+	 * ç§æœ‰æ–¹æ³•ï¼šç”¨äºå¿«é€Ÿæ’åºä¸­é•¿åº¦æ¯”cutoffå°çš„æ•°ç»„çš„æ’åº
 	 * 
 	 * @param a
-	 *            Ò»¸ö¿ÉÅÅĞòµÄÊı×é
+	 *            ä¸€ä¸ªå¯æ’åºçš„æ•°ç»„
 	 * @param left
-	 *            ×óÏÂ±ê
+	 *            å·¦ä¸‹æ ‡
 	 * @param right
-	 *            ÓÒÏÂ±ê
+	 *            å³ä¸‹æ ‡
 	 */
 	private static void insertionSort(Comparable[] a, int left, int right) {
-		for (int p = left + 1; p <= right; p++) { //´ÓµÚ¶ş¸öÔªËØ¿ªÊ¼
-			Comparable tmp = a[p]; //Ñ¡Ôñ·¶Î§ÄÚµÄÊ×¸öÔªËØ
+		for (int p = left + 1; p <= right; p++) { //ä»ç¬¬äºŒä¸ªå…ƒç´ å¼€å§‹
+			Comparable tmp = a[p]; //é€‰æ‹©èŒƒå›´å†…çš„é¦–ä¸ªå…ƒç´ 
 			int j;
 			for (j = p; j > left && tmp.compareTo(a[j - 1]) < 0; j--)
 				a[j] = a[j - 1];
@@ -266,28 +266,28 @@ public final class Sort {
 	}
 
 	/**
-	 * ¿ìËÙÑ¡Ôñ³ÌĞò£¬µÚk´óµÄÊıÒ²¾ÍÊÇÏÂ±êÊÇk-1µÄÊı
+	 * å¿«é€Ÿé€‰æ‹©ç¨‹åºï¼Œç¬¬kå¤§çš„æ•°ä¹Ÿå°±æ˜¯ä¸‹æ ‡æ˜¯k-1çš„æ•°
 	 * 
 	 * @param a
-	 *            Ò»¸ö¿É±È½ÏµÄÊı×é
+	 *            ä¸€ä¸ªå¯æ¯”è¾ƒçš„æ•°ç»„
 	 * @param k
-	 *            ÒªÑ¡ÔñµÄk´óÖµ
+	 *            è¦é€‰æ‹©çš„kå¤§å€¼
 	 */
 	public static void quickSelect(Comparable[] a, int k) {
 		quickSelect(a, 0, a.length - 1, k);
 	}
 
 	/**
-	 * Ë½ÓĞ·½·¨£ºÊ¹ÓÃ¿ìËÙÑ¡ÔñÀ´Ñ¡È¡a[k-1]
+	 * ç§æœ‰æ–¹æ³•ï¼šä½¿ç”¨å¿«é€Ÿé€‰æ‹©æ¥é€‰å–a[k-1]
 	 * 
 	 * @param a
-	 *            Ò»¸ö¿É±È½ÏµÄÊı×é
+	 *            ä¸€ä¸ªå¯æ¯”è¾ƒçš„æ•°ç»„
 	 * @param left
-	 *            ×óÏÂ±ê
+	 *            å·¦ä¸‹æ ‡
 	 * @param right
-	 *            ÓÒÏÂ±ê
+	 *            å³ä¸‹æ ‡
 	 * @param k
-	 *            ÒªÑ¡ÔñµÄk´óÖµ
+	 *            è¦é€‰æ‹©çš„kå¤§å€¼
 	 */
 	private static void quickSelect(Comparable[] a, int left, int right, int k) {
 		if (left + CUTOFF <= right) {
@@ -301,7 +301,7 @@ public final class Sort {
 				else
 					break;
 			}
-			swapReferences(a, i, right - 1); // °ÑÊàÅ¦Ôª·Åµ½Á½²¿·ÖÖĞ¼ä
+			swapReferences(a, i, right - 1); // æŠŠæ¢çº½å…ƒæ”¾åˆ°ä¸¤éƒ¨åˆ†ä¸­é—´
 
 			if (k <= i)
 				quickSelect(a, left, i - 1, k);

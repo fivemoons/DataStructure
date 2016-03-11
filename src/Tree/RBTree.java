@@ -1,4 +1,4 @@
-package DataStructures.Tree;
+package Tree;
 
 enum Color{
 	RED,

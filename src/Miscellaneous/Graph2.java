@@ -8,14 +8,14 @@ import DataStructures.Hash.QuadraticProbingHashTable;
 import DataStructures.List.LinkedListItr;
 import DataStructures.Queue.QueueAr;
 
-class Vertex
+class Vertex2
 {
     String     name;   // Vertex name
     LinkedList adj;    // Adjacent vertices
     int        dist;   // Cost
-    Vertex     path;   // Previous vertex on shortest path
+    Vertex2     path;   // Previous vertex on shortest path
 
-    public Vertex( String nm )
+    public Vertex2( String nm )
       { name = nm; adj = new LinkedList( ); reset( ); }
 
     public void reset( )
@@ -25,7 +25,7 @@ class Vertex
 class MapEntry implements Hashable
 {
     String vertexName;
-    Vertex storedVertex;
+    Vertex2 storedVertex;
 
     public MapEntry( String name )
       { vertexName = new String( name ); storedVertex = null; }
@@ -49,8 +49,8 @@ class Graph
 
     public void addEdge( String sourceName, String destName )
     {
-        Vertex v = getVertex( sourceName );
-        Vertex w = getVertex( destName );
+        Vertex2 v = getVertex( sourceName );
+        Vertex2 w = getVertex( destName );
         v.adj.insert( w, v.adj.zeroth( ) );
     }
 
@@ -61,7 +61,7 @@ class Graph
         if( match == null )
             throw new NoSuchElementException( "Destination vertex not found" );
 
-        Vertex w = match.storedVertex;
+        Vertex2 w = match.storedVertex;
         if( w.dist == INFINITY )
             System.out.println( destName + " is unreachable" );
         else
@@ -76,7 +76,7 @@ class Graph
       // entry is made global to avoid repeated calls to new.
     MapEntry entry = new MapEntry( "" );
 
-    private Vertex getVertex( String vertexName )
+    private Vertex2 getVertex( String vertexName )
     {
         entry.vertexName = vertexName;
         MapEntry match = (MapEntry) vertexMap.find( entry );
@@ -92,7 +92,7 @@ class Graph
         return match.storedVertex;
     }
 
-    private void printPath( Vertex dest )
+    private void printPath( Vertex2 dest )
     {
         if( dest.path != null )
         {
@@ -105,7 +105,7 @@ class Graph
     private void clearAll( )
     {
         for( LinkedListItr itr = allVertices.first( ); !itr.isPastEnd( ); itr.advance( ) )
-            ( (Vertex)itr.retrieve( ) ).reset( );
+            ( (Vertex2)itr.retrieve( ) ).reset( );
     }
 
     public void unweighted( String startName ) throws NoSuchElementException
@@ -118,17 +118,17 @@ class Graph
 
         try
         {
-            Vertex start = match.storedVertex;
+            Vertex2 start = match.storedVertex;
             QueueAr q = new QueueAr( numVertices );
             q.enqueue( start ); start.dist = 0;
 
             while( !q.isEmpty( ) )
             {
-                Vertex v = (Vertex) q.dequeue( );
+                Vertex2 v = (Vertex2) q.dequeue( );
 
                 for( LinkedListItr itr = v.adj.first( ); !itr.isPastEnd( ); itr.advance( ) )
                 {
-                    Vertex w = (Vertex) itr.retrieve( );
+                    Vertex2 w = (Vertex2) itr.retrieve( );
                     if( w.dist == INFINITY )
                     {
                         w.dist = v.dist + 1;    
