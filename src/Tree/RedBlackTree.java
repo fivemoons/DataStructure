@@ -20,7 +20,7 @@ class Node{
 	}
 }
 
-public class RBTree{
+public class RedBlackTree{
 	private static final Color Black = Color.BLACK;
 	private static final Color Red = Color.RED;
 	private Node root;
@@ -300,7 +300,7 @@ public class RBTree{
 	}
 	
 	public static void main(String[] args) {
-		RBTree tree = new RBTree();
+		RedBlackTree tree = new RedBlackTree();
 		tree.insert(12);
 		tree.insert(1);
 		tree.insert(9);
