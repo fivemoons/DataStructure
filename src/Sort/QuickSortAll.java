@@ -8,10 +8,10 @@ public class QuickSortAll {
         int i=l, j=r;
         int x = nums[i];
         while(i<j){
-        	while(i<j && x<nums[j]) j--;
-        	nums[i] = nums[j];
-        	while(i<j && nums[i]<=x) i++;
-        	nums[j] = nums[i];
+        		while(i<j && x<nums[j]) j--;
+        		nums[i] = nums[j];
+        		while(i<j && nums[i]<=x) i++;
+        		nums[j] = nums[i];
         }
         nums[i] = x;
         if(l<i) quickSort0(nums,l,i-1);
@@ -43,22 +43,22 @@ public class QuickSortAll {
     		k--;
         int l=0, r=nums.length-1;
         while(l<r){
-        	int x = l, y = r;
-        	int key = nums[x];
-        	while(x<y){
-        		while(x < y && key > nums[y]) y--;
-        		nums[x] = nums[y];
-        		while(x < y && nums[x] >= key) x++;
-        		nums[y] = nums[x];
-        	}
-        	nums[x] = key;
-        	if(x == k)
-        		return nums[k];
-        	else if(x > k)
-        		r = x - 1;
-        	else
-        		l = x + 1;
-        }
+        		int x = l, y = r;
+        		int key = nums[x];
+        		while(x<y){
+        			while(x < y && key > nums[y]) y--;
+        			nums[x] = nums[y];
+        			while(x < y && nums[x] >= key) x++;
+        			nums[y] = nums[x];
+        		}
+        		nums[x] = key;
+        		if(x == k)
+        			return nums[k];
+        		else if(x > k)
+        			r = x - 1;
+        		else
+        			l = x + 1;
+        		}
         return nums[k];
     }
     /*

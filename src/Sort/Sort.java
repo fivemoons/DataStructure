@@ -1,4 +1,8 @@
-package DataStructures;
+package Sort;
+
+import DataStructures.Comparable;
+import DataStructures.MyInteger;
+import DataStructures.Random;
 
 /**
  * 排序方法 正序排序

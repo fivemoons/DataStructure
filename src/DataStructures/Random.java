@@ -1,6 +1,8 @@
     package DataStructures;
 
-    // Random class
+import Sort.Sort;
+
+// Random class
     //
     // CONSTRUCTION: with (a) no initializer or (b) an integer
     //     that specifies the initial state of the generator
