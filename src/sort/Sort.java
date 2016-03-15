@@ -1,4 +1,4 @@
-package Sort;
+package sort;
 
 import DataStructures.Comparable;
 import DataStructures.MyInteger;

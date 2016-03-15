@@ -1,6 +1,6 @@
     package DataStructures;
 
-import Sort.Sort;
+import sort.Sort;
 
 // Random class
     //

@@ -1,4 +1,4 @@
-package Sort;
+package sort;
 
 public class SelectSort {
 	public static void Sort(int[] a){

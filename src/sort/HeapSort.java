@@ -1,4 +1,4 @@
-package Sort;
+package sort;
 
 public class HeapSort {
 	private static void swap(int[] a, int i, int j){
