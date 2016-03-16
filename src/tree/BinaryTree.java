@@ -6,14 +6,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.Stack;
 
-class TreeNode{
-	int val;
-	TreeNode left;
-	TreeNode right;
-	TreeNode(int x){
-		this.val = x;
-	}
-}
 public class BinaryTree {
 	public static List<Integer> preOrderTraversalWithoutRecursion(TreeNode root){
 		List<Integer> ans = new LinkedList<Integer>();
