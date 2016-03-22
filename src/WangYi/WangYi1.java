@@ -1,7 +1,7 @@
-package array;
+package WangYi;
 import java.util.Scanner;
 
-public class WangYi {
+public class WangYi1 {
 	public static int gcd(int a, int b){
 		if(a < b) return gcd(b,a);
 		if(a % b ==0){
