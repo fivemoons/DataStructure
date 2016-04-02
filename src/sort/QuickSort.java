@@ -40,7 +40,7 @@ public class QuickSort {
 		else return a[k];
 	}
 	public static void main(String[] args) {
-		int[] a = new int[]{2,3,4,8,6,7,2};
+		int[] a = new int[]{2,3,4,8,6,7,2,10,2,3,4,5,67,3,4,6,4,7,5,3,23,4,5,6,4,2};
 		Sort(a,0,a.length-1);
 		for(int i:a){
 			System.out.print(i+" ");
