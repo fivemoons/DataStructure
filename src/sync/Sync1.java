@@ -1,7 +1,8 @@
 package sync;
 
 public class Sync1 {
-	public int sum(int a, int b){
+	public void sum(int a, int b){
+		Object mutex = null;
 		synchronized (mutex) {
 			
 		}
