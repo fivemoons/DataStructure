@@ -27,19 +27,33 @@ public class Y2015_Q3_IslandsTravel {
 				len[i][j] = Math.min(len[i][j], len(map,i,j));
 			}
 		}
-		for(int k=0; k<N; k++){
+
+		boolean[] inqueue = new boolean[N];
+		Arrays.fill(inqueue, false);
+		int[] ans = new int[N];
+		Arrays.fill(ans, 1000000000);
+		
+		Queue<Integer> q = new PriorityQueue<Integer>(N);
+		
+		q.offer(0);
+		inqueue[0] = true;
+		ans[0] = 0;
+		while(!q.isEmpty()){
+			int cur = q.poll();
+			inqueue[cur] = false;
 			for(int i=0; i<N; i++){
-				if(i!=k)
-				for(int j=0; j<N; j++){
-					if((j!=i) && (j!=k)){
-						len[i][j] = Math.min(len[i][j], 
-								len(map,i,k) + len(map,k,j)
-								);
+				int temp = ans[cur] + len[cur][i];
+				if(ans[i] > temp){
+					ans[i] = temp;
+					if(!inqueue[i]){
+						q.offer(i);
+						inqueue[i] = false;
 					}
 				}
 			}
 		}
-		System.out.println(len[0][N-1]);
+		
+		System.out.println(ans[N-1]);
 	}
 	
 }
