@@ -10,47 +10,105 @@ public class Y2015_Q4_Recruitment {
 		int X = sc.nextInt(); //男人数
 		int Y = sc.nextInt(); //女人数
 		int B = sc.nextInt(); //总工资
-		int[][] minput = new int[N+1][3]; //N个男人的输入 价值 工资
-		int[][] winput = new int[N+1][3]; //N个女人的输入 价值 工资
-		int mcount = 0;
-		int wcount = 0;
-		for(int i=1; i<=N; i++){
-			String G = sc.nextLine();
-			char gg = G.charAt(0);
-			G = G.substring(2);
-			String[] sarr = G.split(" ");
-			if(gg=='M'){
-				mcount++;
-				minput[mcount][0] = i;
-				minput[mcount][1] = Integer.parseInt(sarr[0]);
-				minput[mcount][2] = Integer.parseInt(sarr[1]);
-			}else if(gg=='F'){
-				wcount++;
-				winput[wcount][0] = i;
-				winput[wcount][1] = Integer.parseInt(sarr[0]);
-				winput[wcount][2] = Integer.parseInt(sarr[1]);
+		sc.nextLine();
+		int[][] mdp = new int[N+1][B+1]; //男dp
+		int[][] wdp = new int[N+1][B+1]; //女dp
+		int[][][] mrec = new int[101][1001][2];
+		int[][][] wrec = new int[101][1001][2];
+		for(int i=0; i<=N; i++){
+			for(int j=0; j<=B; j++){
+				mdp[i][j] = wdp[i][j] = -1;
 			}
 		}
 		
-		int[][] men = new int[X+1][B+1];  //N个男人 B工资能多少能力
-		int[][] women = new int[Y+1][B+1]; //N个女人 B工资能多少能力
-		int[][][] mset = new int[X+1][B+1][X+1];
-		int[][][] wset = new int[Y+1][B+1][Y+1];
+		int mcount = 0;
+		int wcount = 0;
+		int sum = 0;
+		wdp[0][0] = mdp[0][0] = 0;
 		
-		for(int j=1; j<=mcount; j++){ //枚举每一个人
-			for(int i=j; i>=1; i--){ //现在选多少人
-				int V = minput[j][1];
-				int S = minput[j][2];
-				for(int k=V; k<=B; k++){ //工资
-					int temp = men[i-1][k-V] + S; //要了这个人
-					if (temp > men[i][k]){ //只有严格小于才要这个人
-						men[i][k] = temp;
-						mset[i][k] = mset[i-1][k-V].clone();
-						mset[i][k] [ ++mset[i][k][0] ] = minput[j][0];
+		for(int i=1; i<=N; i++){
+			String G = sc.nextLine();
+			char gg = G.charAt(0);
+			String[] sarr = G.split(" ");
+			int V = Integer.parseInt(sarr[1]);
+			int S = Integer.parseInt(sarr[2]);
+			if(gg=='M'){
+				if(mcount != X) mcount++;
+				for(int j= mcount; j>=1; j--){
+					for(int k = sum; k >= S; k--)
+					{
+						if(mdp[j - 1][k - S] >= 0 && mdp[j - 1][k - S] + V > mdp[j][k])
+						{
+							mdp[j][k] = mdp[j - 1][k - S] + V;
+							mrec[j][k][0] = mrec[j - 1][k - S][0];
+							mrec[j][k][1] = mrec[j - 1][k - S][1];
+							if(i - 1 < 50) mrec[j][k][0] |= 1L << (i - 1);
+							else mrec[j][k][1] |= 1L << (i - 1 - 50);
+						} 
+					}
+				}
+			}else{
+				if(wcount != Y) wcount++;
+				for(int j = wcount; j >= 1; j--)
+				{
+					for(int k = sum; k >= S; k--)
+					{
+						if(wdp[j - 1][k - S] >= 0 && wdp[j - 1][k - S] + V > wdp[j][k])
+						{
+							wdp[j][k] = wdp[j - 1][k - S] + V;
+							wrec[j][k][0] = wrec[j - 1][k - S][0];
+							wrec[j][k][1] = wrec[j - 1][k - S][1];
+							if(i - 1 < 50) wrec[j][k][0] |= 1L << (i - 1);
+							else wrec[j][k][1] |= 1L << (i - 1 - 50);
+						} 
 					}
 				}
 			}
 		}
+		
+		//组合
+		int ans = -1, count = 0;
+		long record[] = new long[2];
+		for(int i = 0; i <= B; i++)
+		{
+			if(mdp[X][i] < 0) continue;
+			for(int j = 0; j <= B - i; j++)
+			{
+				if(wdp[Y][j] < 0) continue;
+				
+				if(mdp[X][i] + wdp[Y][j] > ans || mdp[X][i] + wdp[Y][j] == ans && count > i + j)
+				{
+					ans = mdp[X][i] + wdp[Y][j];
+					count = i + j;
+					record[0] = mrec[X][i][0] | wrec[Y][j][0];
+					record[1] = mrec[X][i][1] | wrec[Y][j][1];
+				}
+				else if(mdp[X][i] + wdp[Y][j] == ans && count == i + j)
+				{
+					long record0 = mrec[X][i][0] | wrec[Y][j][0];
+					long record1 = mrec[X][i][1] | wrec[Y][j][1];
+					if(record0 < record[0] || record0 == record[0] && record1 < record[1])
+					{
+						record[0] = record0;
+						record[1] = record1;
+					}
+				}
+			}	
+		} 
+		
+		System.out.println(ans + " " + count);
+		
+		for(int i = 1; i <= 50; i++)
+		{
+			if((record[0] & 1) == 1) System.out.print(i+" ");
+			record[0] >>= 1;
+		}
+		
+		for(int i = 51; i <= 100; i++)
+		{
+			if((record[1] & 1) == 1) System.out.print(i+" ");
+			record[1] >>= 1;
+		}
+		System.out.println();
 	}
-
 }
