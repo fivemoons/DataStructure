@@ -6,7 +6,7 @@ DataStructure for Java
 https://github.com/fivemoons/DataStructure/blob/master/src/tree/RedBlackTree.java
 
 二叉树的前序中序后序遍历（非递归版）：
-https://github.com/fivemoons/DataStructure/blob/master/src/Tree/BinaryTree.java
+https://github.com/fivemoons/DataStructure/blob/master/src/tree/BinaryTree.java
 
 二叉树转链表：
-https://github.com/fivemoons/DataStructure/blob/master/src/Tree/BSTreeToLinkedList.java
+https://github.com/fivemoons/DataStructure/blob/master/src/tree/BSTreeToLinkedList.java
