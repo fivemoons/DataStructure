@@ -16,7 +16,6 @@ public class Q1 {
 			int she = s1 + s2;
 			int the = t1 + t2;
 		}else{//bai
-			n 
 		}
 	}
 
