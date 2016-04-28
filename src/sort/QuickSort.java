@@ -2,7 +2,7 @@ package sort;
 
 public class QuickSort {
 	public static void Sort(int[] a, int l, int r){ //快速排序
-		int x = a[l + (r - l)/2];
+		int x = a[l + ((r - l)>>1)];
 		int i = l;
 		int j = r;
 		while(i<=j){
@@ -21,7 +21,7 @@ public class QuickSort {
 	}
 	
 	public static int select(int[] a, int l, int r, int k){ //快速选择
-		int x = a[l + (r - l)/2];
+		int x = a[l + ((r - l)>>1)];
 		int i = l;
 		int j = r;
 		while(i<=j){
