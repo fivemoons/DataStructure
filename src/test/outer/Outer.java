@@ -68,17 +68,12 @@ public class Outer {
 			}
 			int inner_i = 100;
 			void inner_f(int k){
-				//如果内部类没有与外部类同名的变量，在内部类中可以直接访问外部类的实例变量
-				System.out.println(out_i);
-				//可以访问外部类的局部变量（即方法内的变量），但是变量必须是final的
-				System.out.println(j);
-				//System.out.println(i);
-				//如果内部类中有与外部类同名的变量，直接用变量名访问的是内部类的变量
-				System.out.println(s);
-				//用this.变量名访问的也是内部类变量
-				System.out.println(this.s);
-				//用外部类名.this.内部类变量名访问的是外部类变量
-				System.out.println(Outer.this.s);
+				System.out.println(out_i);//如果内部类没有与外部类同名的变量，在内部类中可以直接访问外部类的实例变量
+				System.out.println(j);//可以访问外部类的局部变量（即方法内的变量），但是变量必须是final的
+				//System.out.println(i);//不能访问外部类的非final的局部变量
+				System.out.println(s);//如果内部类中有与外部类同名的变量，直接用变量名访问的是内部类的变量
+				System.out.println(this.s);//用this.变量名访问的也是内部类变量
+				System.out.println(Outer.this.s);//用外部类名.this.内部类变量名访问的是外部类变量
 			}
 		}
 		new Inner2(k);

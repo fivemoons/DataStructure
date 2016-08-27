@@ -1,23 +1,22 @@
 package tree;
 
-import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Set;
 import java.util.Stack;
 
 public class BinaryTree {
 	public static List<Integer> preOrderTraversalWithoutRecursion(TreeNode root){
 		List<Integer> ans = new LinkedList<Integer>();
-		if(root == null) return ans;
 		Stack<TreeNode> stack = new Stack<TreeNode>();
-		while(root != null || !stack.isEmpty()){
-			if(root == null){
-				root = stack.pop().right;
+		TreeNode p = root;
+		while(p != null || !stack.isEmpty()){
+			if(p != null){
+				ans.add(p.val); //前序遍历入栈就加入到ans中
+				stack.push(p);
+				p = p.left;
 			}else{
-				stack.push(root);
-				ans.add(stack.peek().val); //前序遍历入栈就加入到ans中
-				root = root.left;
+				p = stack.pop();
+				p = p.right;
 			}
 		}
 		return ans;
@@ -25,15 +24,16 @@ public class BinaryTree {
 	
 	public static List<Integer> midOrderTraversalWithoutRecursion(TreeNode root){
 		List<Integer> ans = new LinkedList<Integer>();
-		if(root == null) return ans;
 		Stack<TreeNode> stack = new Stack<TreeNode>();
-		while(root != null || !stack.isEmpty()){
-			if(root == null){
-				ans.add(stack.peek().val); //中序遍历出栈加入到ans中
-				root = stack.pop().right;
+		TreeNode p = root;
+		while(p != null || !stack.isEmpty()){
+			if(p != null){
+				stack.push(p);
+				p = p.left;
 			}else{
-				stack.push(root);
-				root = root.left;
+				p = stack.pop();
+				ans.add(p.val); //中序遍历出栈加入到ans中
+				p = p.right;
 			}
 		}
 		return ans;
@@ -41,45 +41,22 @@ public class BinaryTree {
 	
 	public static List<Integer> postOrderTraversalWithoutRecursion(TreeNode root) {
 		List<Integer> ans = new LinkedList<Integer>();
-		if (root == null) return ans;
-		TreeNode last = null;
 		Stack<TreeNode> stack = new Stack<TreeNode>();
-		while (root != null || !stack.isEmpty()){
-			if(root == null){
+		TreeNode p = root;
+		TreeNode last = null;
+		while (p != null || !stack.isEmpty()){
+			if(p != null){
+				stack.push(p);
+				p = p.left;
+			}else{
 				if(stack.peek().right == null || stack.peek().right == last){ //右儿子不需要遍历
-					last = stack.peek();
-					ans.add(stack.pop().val);
+					last = stack.pop();
+					ans.add(last.val);
 				}else{
-					root = stack.peek().right; //右儿子需要遍历
+					p = stack.peek().right; //右儿子需要遍历
 				}
-			}else{
-				stack.push(root);
-				root = root.left;
 			}
 		}
-		return ans;
-	}
-	
-	
-	public static List<Integer> postOrderTraversalWithoutRecursion2(TreeNode root){
-		List<Integer> ans = new LinkedList<Integer>();
-		if(root == null) return ans;
-		Stack<TreeNode> stack = new Stack<TreeNode>(); 
-		Set<TreeNode> set = new HashSet<TreeNode>();
-		while(root != null || !stack.empty()){
-			if(root == null){
-				if(set.contains(stack.peek())){ //右儿子不需要遍历
-					ans.add(stack.pop().val);
-				}else{ //右儿子需要遍历
-					set.add(stack.peek());
-					root = stack.peek().right;
-				}
-			}else{
-				stack.push(root);
-				root = root.left;
-			}
-		}
-		
 		return ans;
 	}
 	
@@ -93,7 +70,6 @@ public class BinaryTree {
 		List<Integer> test1 = preOrderTraversalWithoutRecursion(t);
 		List<Integer> test2 = midOrderTraversalWithoutRecursion(t);
 		List<Integer> test3 = postOrderTraversalWithoutRecursion(t);
-		List<Integer> test4 = postOrderTraversalWithoutRecursion2(t);
 		
 		System.out.println("前序遍历:");
 		for(Integer i:test1){
@@ -113,11 +89,6 @@ public class BinaryTree {
 		}
 		System.out.println();
 		
-		System.out.println("后序遍历:");
-		for(Integer i:test4){
-			System.out.print(i+" ");
-		}
-		System.out.println();
 	}
 
 }
